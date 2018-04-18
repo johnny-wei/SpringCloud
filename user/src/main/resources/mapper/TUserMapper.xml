@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lychr.user.dao.TUserMapper" >
+  <resultMap id="BaseResultMap" type="com.lychr.marketfeign.bean.TUser" >
+    <id column="UserId" property="userid" jdbcType="INTEGER" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Level" property="level" jdbcType="VARCHAR" />
+    <result column="InviterID" property="inviterid" jdbcType="VARCHAR" />
+    <result column="Superior" property="superior" jdbcType="VARCHAR" />
+    <result column="TelNum" property="telnum" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+    <result column="RegisterDate" property="registerdate" jdbcType="TIMESTAMP"/>
+    <result column="PayPassword" property="paypassword" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UserId, Password, Level, InviterID, Superior, TelNum,
+    Status,RegisterDate,PayPassword
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where UserId = #{userid,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="userid" parameterType="com.lychr.marketfeign.bean.TUser" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="level != null" >
+        Level,
+      </if>
+      <if test="inviterid != null" >
+        InviterID,
+      </if>
+      <if test="superior != null" >
+        Superior,
+      </if>
+      <if test="telnum != null" >
+        TelNum,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="registerdate != null" >
+        RegisterDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="inviterid != null" >
+        #{inviterid,jdbcType=VARCHAR},
+      </if>
+      <if test="superior != null" >
+        #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="telnum != null" >
+        #{telnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="registerdate != null" >
+        #{registerdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lychr.marketfeign.bean.TUser" >
+    update t_user
+    <set >
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        Level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="inviterid != null" >
+        InviterID = #{inviterid,jdbcType=VARCHAR},
+      </if>
+      <if test="superior != null" >
+        Superior = #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="telnum != null" >
+        TelNum = #{telnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="registerdate != null" >
+        RegisterDate=#{registerdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paypassword!=null">
+        PayPassword=#{paypassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lychr.marketfeign.bean.TUser" >
+    update t_user
+    set
+      Password = #{password,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=VARCHAR},
+      InviterID = #{inviterid,jdbcType=VARCHAR},
+      Superior = #{superior,jdbcType=VARCHAR},
+      TelNum = #{telnum,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=VARCHAR},
+      RegisterDate=#{registerdate,jdbcType=TIMESTAMP}
+    where UserId = #{userid,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="queryUserByExample" resultMap="BaseResultMap" parameterType="com.lychr.marketfeign.bean.TUser">
+    SELECT
+    <include refid="Base_Column_List" />
+    from t_user t
+    where 1=1
+      <if test="userid!=null">
+       and t.UserId=#{userid}
+      </if>
+    <if test="level!=null">
+      and t.level=#{level}
+    </if>
+    <if test="inviterid!=null">
+      and  t.inviterid=#{inviterid}
+    </if>
+    <if test="superior!=null">
+      and  t.superior=#{superior}
+    </if>
+    <if test="telnum!=null">
+      and t.telnum=#{telnum}
+    </if>
+    <if test="password!=null">
+      and t.password=#{password}
+    </if>
+    <if test="status!=null">
+      and t.status=#{status}
+    </if>
+    <if test="paypassword!=null">
+      and t.paypassword=#{paypassword}
+    </if>
+  </select>
+  <select id="queryUserDetailInfoByExample" resultType="com.lychr.marketfeign.bean.UserInfo" parameterType="com.lychr.marketfeign.bean.UserInfo">
+    SELECT
+    t.password as password,
+    t.level as level,
+    t.inviterid as inviterid,
+    t.superior as superior,
+    t.telnum as telnum,
+    t.status as status,
+    tt.nickname as nickname,
+    tt.birthday as birthday,
+    tt.gender as gender,
+    tt.region as region,
+    tt.invitationid as invitationid,
+    tt.wechatqr as wechatqr,
+    tt.headpic as headpic,
+    tt.tdhipp as tdhipp,
+    tt.tmhipp as tmhipp,
+    tt.hipp as hipp
+    from t_user t,t_userdetail tt
+    where t.UserId=tt.UserId
+    <if test="userid!=null">
+      and t.UserId=#{userid}
+    </if>
+    <if test="level!=null">
+      and t.level=#{level}
+    </if>
+    <if test="inviterid!=null">
+      and  t.inviterid=#{inviterid}
+    </if>
+    <if test="superior!=null">
+      and  t.superior=#{superior}
+    </if>
+    <if test="telnum!=null">
+      and t.telnum=#{telnum}
+    </if>
+    <if test="password!=null">
+      and t.password=#{password}
+    </if>
+    <if test="nickname!=null">
+      and tt.nickname=#{nickname}
+    </if>
+    <if test="birthday!=null">
+      and tt.birthday=#{birthday}
+    </if>
+    <if test="gender!=null">
+      and tt.gender=#{gender}
+    </if>
+    <if test="region!=null">
+      and tt.region=#{region}
+    </if>
+    <if test="invitationid!=null">
+      and  tt.invitationid=#{invitationid}
+    </if>
+    <if test="wechatqr!=null">
+      and tt.wechatqr=#{wechatqr}
+    </if>
+  </select>
+  <update id="updateUserInfoByTelNum" parameterType="java.lang.String">
+    UPDATE t_user
+    <set >
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        Level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="inviterid != null" >
+        InviterID = #{inviterid,jdbcType=VARCHAR},
+      </if>
+      <if test="superior != null" >
+        Superior = #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="telnum != null" >
+        TelNum = #{telnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    WHERE TelNum=#{telnum}
+  </update>
+  <select id="selectByInviteCode" parameterType="java.lang.String" resultType="com.lychr.marketfeign.bean.UserInfo">
+     SELECT
+    t.password as password,
+    t.level as level,
+    t.inviterid as inviterid,
+    t.superior as superior,
+    t.telnum as telnum,
+    t.status as status,
+    tt.nickname as nickname,
+    tt.birthday as birthday,
+    tt.gender as gender,
+    tt.region as region,
+    tt.invitationid as invitationid,
+    tt.wechatqr as wechatqr,
+    tt.headpic as headpic,
+    tt.tdhipp as tdhipp,
+    tt.tmhipp as tmhipp,
+    tt.hipp as hipp,
+    tt.directhipp as directhipp,
+    tt.userdetailid as userdetailid
+    from t_user t,t_userdetail tt
+    where t.UserId=tt.UserId
+    AND  tt.invitationid=#{invitecode}
+  </select>
+  <select id="selectUserByMobile" parameterType="java.lang.String" resultType="com.lychr.marketfeign.bean.TUser">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    WHERE TelNum = #{telnum,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

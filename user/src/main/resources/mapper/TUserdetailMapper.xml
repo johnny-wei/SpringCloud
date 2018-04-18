@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lychr.market.dao.TUserdetailMapper">
+    <resultMap id="BaseResultMap" type="com.lychr.marketfeign.bean.TUserdetail">
+        <id column="UserDetailId" property="userdetailid" jdbcType="INTEGER"/>
+        <result column="UserId" property="userid" jdbcType="INTEGER"/>
+        <result column="NickName" property="nickname" jdbcType="VARCHAR"/>
+        <result column="Birthday" property="birthday" jdbcType="DATE"/>
+        <result column="Gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="Region" property="region" jdbcType="VARCHAR"/>
+        <result column="InvitationID" property="invitationid" jdbcType="VARCHAR"/>
+        <result column="WechatQR" property="wechatqr" jdbcType="VARCHAR"/>
+        <result column="HeadPic" property="headpic" jdbcType="VARCHAR"/>
+        <result column="TdHipp" property="tdhipp" jdbcType="INTEGER"/>
+        <result column="TmHipp" property="tmhipp" jdbcType="INTEGER"/>
+        <result column="Hipp" property="hipp" jdbcType="INTEGER"/>
+        <result column="DirectHipp" property="directhipp" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    UserDetailId, UserId, NickName, Birthday, Gender, Region, InvitationID, WechatQR, 
+    HeadPic,TdHipp,TmHipp,Hipp,DirectHipp
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_userdetail
+        where UserDetailId = #{userdetailid,jdbcType=INTEGER}
+    </select>
+    <insert id="insertSelective" parameterType="com.lychr.marketfeign.bean.TUserdetail">
+        insert into t_userdetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userdetailid != null">
+                UserDetailId,
+            </if>
+            <if test="userid != null">
+                UserId,
+            </if>
+            <if test="nickname != null">
+                NickName,
+            </if>
+            <if test="birthday != null">
+                Birthday,
+            </if>
+            <if test="gender != null">
+                Gender,
+            </if>
+            <if test="region != null">
+                Region,
+            </if>
+            <if test="invitationid != null">
+                InvitationID,
+            </if>
+            <if test="wechatqr != null">
+                WechatQR,
+            </if>
+            <if test="headpic != null">
+                HeadPic,
+            </if>
+            <if test="tdhipp != null">
+                TdHipp,
+            </if>
+            <if test="tmhipp != null">
+                TmHipp,
+            </if>
+            <if test="hipp != null">
+                Hipp,
+            </if>
+            <if test="directhipp != null">
+                DirectHipp,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userdetailid != null">
+                #{userdetailid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null">
+                #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="invitationid != null">
+                #{invitationid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatqr != null">
+                #{wechatqr,jdbcType=VARCHAR},
+            </if>
+            <if test="headpic != null">
+                #{headpic,jdbcType=VARCHAR},
+            </if>
+            <if test="tdhipp != null">
+                #{tdhipp,jdbcType=INTEGER},
+            </if>
+            <if test="tmhipp != null">
+                #{tmhipp,jdbcType=INTEGER},
+            </if>
+            <if test="hipp != null">
+                #{hipp,jdbcType=INTEGER},
+            </if>
+            <if test="directhipp != null">
+                #{directhipp,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lychr.marketfeign.bean.TUserdetail">
+        update t_userdetail
+        <set>
+            <if test="userid != null">
+                UserId = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                NickName = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                Birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="gender != null">
+                Gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null">
+                Region = #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="invitationid != null">
+                InvitationID = #{invitationid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatqr != null">
+                WechatQR = #{wechatqr,jdbcType=VARCHAR},
+            </if>
+            <if test="headpic != null">
+                HeadPic = #{headpic,jdbcType=VARCHAR},
+            </if>
+            <if test="tdhipp != null">
+                TdHipp=#{tdhipp,jdbcType=INTEGER},
+            </if>
+            <if test="tmhipp != null">
+                TmHipp=#{tmhipp,jdbcType=INTEGER},
+            </if>
+            <if test="hipp != null">
+                Hipp=#{hipp,jdbcType=INTEGER},
+            </if>
+            <if test="directhipp != null">
+                DirectHipp=#{directhipp,jdbcType=INTEGER},
+            </if>
+
+        </set>
+        where UserDetailId = #{userdetailid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lychr.marketfeign.bean.TUserdetail">
+    update t_userdetail
+    set UserId = #{userid,jdbcType=INTEGER},
+      NickName = #{nickname,jdbcType=VARCHAR},
+      Birthday = #{birthday,jdbcType=DATE},
+      Gender = #{gender,jdbcType=VARCHAR},
+      Region = #{region,jdbcType=VARCHAR},
+      InvitationID = #{invitationid,jdbcType=VARCHAR},
+      WechatQR = #{wechatqr,jdbcType=VARCHAR},
+      HeadPic = #{headpic,jdbcType=VARCHAR},
+      TdHipp=#{tdhipp,jdbcType=INTEGER},
+      TmHipp=#{tmhipp,jdbcType=INTEGER},
+      Hipp=#{hipp,jdbcType=INTEGER},
+      DirectHipp=#{directhipp,jdbcType=INTEGER}
+    where UserDetailId = #{userdetailid,jdbcType=INTEGER}
+  </update>
+    <select id="queryUserOtherInfoByUExample" resultMap="BaseResultMap"
+            parameterType="com.lychr.marketfeign.bean.TUserdetail">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_userdetail
+        WHERE 1=1
+        <if test="userdetailid!=null">
+            AND userdetailid=#{userdetailid}
+        </if>
+        <if test="userid!=null">
+            AND userid=#{userid}
+        </if>
+        <if test="nickname!=null">
+            AND nickname=#{nickname}
+        </if>
+        <if test="birthday!=null">
+            AND birthday=#{birthday}
+        </if>
+        <if test="gender!=null">
+            AND gender=#{gender}
+        </if>
+        <if test="region!=null">
+            AND region=#{region}
+        </if>
+        <if test="invitationid!=null">
+            AND  invitationid=#{invitationid}
+        </if>
+        <if test="wechatqr!=null">
+            AND wechatqr=#{wechatqr}
+        </if>
+        <if test="headpic!=null">
+            AND headpic=#{headpic}
+        </if>
+
+
+    </select>
+    <update id="updateUserDetailInfoByUserId" parameterType="com.lychr.marketfeign.bean.TUserdetail">
+        update t_userdetail
+        <set>
+            <if test="nickname != null">
+                NickName = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                Birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="gender != null">
+                Gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null">
+                Region = #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="invitationid != null">
+                InvitationID = #{invitationid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatqr != null">
+                WechatQR = #{wechatqr,jdbcType=VARCHAR},
+            </if>
+            <if test="headpic != null">
+                HeadPic = #{headpic,jdbcType=VARCHAR},
+            </if>
+            <if test="tdhipp != null">
+                TdHipp=#{tdhipp,jdbcType=INTEGER},
+            </if>
+            <if test="tmhipp != null">
+                TmHipp=#{tmhipp,jdbcType=INTEGER},
+            </if>
+            <if test="hipp != null">
+                Hipp=#{hipp,jdbcType=INTEGER},
+            </if>
+            <if test="directhipp != null">
+                DirectHipp=#{directhipp,jdbcType=INTEGER},
+            </if>
+
+        </set>
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+    <select id="queryUserDetailByInviteCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from t_userdetail
+        where  InvitationID = #{invitecode,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
